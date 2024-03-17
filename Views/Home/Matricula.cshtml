@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewData["Title"] = "Matricula";
+}
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+
+
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img src="~/img/matricula-banner.jpg" class="rectangular" alt="...">
+            <img src="~/img/matricula-banner-cuadrado.jpg" class="cuadrada" alt="...">
+
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/matricula3-banner.jpg" class="rectangular" alt="...">
+            <img src="~/img/matricula3-banner-cuadrado.jpg" class="cuadrada" alt="...">
+
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/matricula2-banner.jpg" class="rectangular" alt="...">
+            <img src="~/img/matricula2-banner-cuadrado.jpg" class="cuadrada" alt="...">
+
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        @* <div class="carousel-item">
+        <img src="~/img/libro-banner.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+        @*  <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+        </div>
+        </div> *@
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+@* <img src="~/img/matricula3-banner.jpg" class="d-block w-100 mt-2" alt="...">
+ *@<h1 class="nav-link" style="font-family: 'Ruda', sans-serif;color: #ee6538; font-size:22px;font-weight: bold;">Contactanos mediante nuestras Redes Sociales o mediante el siguiente formulario</h1>
+<div class="row justify-content-center mt-4 border shadow p-4">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                @*                 <label for="nombre">Nombre:</label>
+                *@                <input type="text" class="form-control mt-2" id="nombre" placeholder="Ingresa tu nombre">
+            </div>
+
+            <div class="form-group">
+                @*                 <label for="correo" class="text-left">Correo Electrónico:</label>
+                *@                <input type="email" class="form-control mt-2" id="correo" placeholder="Ingresa tu correo electrónico">
+            </div>
+
+            <div class="form-group">
+                @*                 <label for="celular" class="text-left">Celular:</label>
+                *@                <input type="tel" class="form-control mt-2" id="celular" placeholder="Ingresa tu número de celular">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @*                 <label for="mensaje" class="text-left">Mensaje:</label>
+                *@                <input class="form-control mt-2" id="mensaje" rows="1" placeholder="Cuentanos a mas detalle...">
+            </div>
+
+            <div class="form-group">
+                @*                 <label for="nivel" class="text-left">Nivel de Estudio:</label>
+                *@                <select class="form-control mt-2" id="nivel" onchange="actualizarGrados()">
+                    <option value="" disabled selected>Selecciona tu sección</option>
+                    <option value="inicial">Inicial</option>
+                    <option value="primaria">Primaria</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                @*                 <label for="grado" class="text-left">Grado:</label>
+                *@                <select class="form-control mt-2" id="grado" disabled>
+                    <option value="" disabled selected>Selecciona tu grado</option>
+                    <!-- Opciones inicial -->
+                    <option value="3">3 años</option>
+                    <option value="4">4 años</option>
+                    <option value="5">5 años</option>
+
+                    <!-- Opciones primaria (inicialmente ocultas) -->
+                    <option value="1" style="display: none">1er Grado</option>
+                    <option value="2" style="display: none">2do Grado</option>
+                    <option value="3" style="display: none">3er Grado</option>
+                    <option value="4" style="display: none">4to Grado</option>
+                    <option value="5" style="display: none">5to Grado</option>
+                    <option value="6" style="display: none">6to Grado</option>
+                </select>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="text-center">
+        <button onclick="enviarFormulario()" class="btn btn-primary mt-3" style="background-color: #05428d; width: 150px;">Enviar</button>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="FormularioEnviadoCorrectamenteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Formulario Enviado</h5>
+                @* <button type="button" class="close" onclick="cerrarModalFormulario()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button> *@
+            </div>
+            <div class="modal-body">
+                <p>El formulario ha sido enviado correctamente. Estaremos en contacto lo más pronto posible.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="cerrarModalFormulario()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="FormularioNoCompletadoModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Error</h5>
+                @* <button type="button" class="close" onclick="cerrarModalFormularioNoCompletado()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button> *@
+            </div>
+            <div class="modal-body">
+                <p>Por favor, complete todos los campos del formulario antes de enviarlo.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="cerrarModalFormularioNoCompletado()" style="background-color: darkred;">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/site.js" asp-append-version="true"></script>

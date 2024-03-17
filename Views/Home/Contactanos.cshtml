@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewData["Title"] = "Contactanos";
+}
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<div class="row justify-content-center mt-4 border shadow p-4">
+    <h2 style="font-family: 'Ruda', sans-serif; color: #f37021;" class="mb-3">Para obtener más información, completa el formulario:</h2>
+    <div class="row">
+        <h3>Datos:</h3>
+        <div class="col-md-6">
+            
+            <div class="form-group">
+@*                 <label for="nombre">Nombre:</label>
+ *@                <input type="text" class="form-control mt-2" id="nombre" placeholder="Ingresa tu nombre">
+            </div>
+
+            <div class="form-group">
+@*                 <label for="correo" class="text-left">Correo Electrónico:</label>
+ *@                <input type="email" class="form-control mt-2" id="correo" placeholder="Ingresa tu correo electrónico">
+            </div>
+
+            <div class="form-group">
+@*                 <label for="celular" class="text-left">Celular:</label>
+ *@                <input type="tel" class="form-control mt-2" id="celular" placeholder="Ingresa tu número de celular">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+@*                 <label for="mensaje" class="text-left">Mensaje:</label>
+ *@                <input class="form-control mt-2" id="mensaje" rows="1" placeholder="Cuentanos a mas detalle...">
+            </div>
+
+            <div class="form-group">
+@*                 <label for="nivel" class="text-left">Nivel de Estudio:</label>
+ *@                <select class="form-control mt-2" id="nivel" onchange="actualizarGrados()">
+                    <option value="" disabled selected>Selecciona tu sección</option>
+                    <option value="inicial">Inicial</option>
+                    <option value="primaria">Primaria</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+@*                 <label for="grado" class="text-left">Grado:</label>
+ *@                <select class="form-control mt-2" id="grado" disabled>
+                    <option value="" disabled selected>Selecciona tu grado</option>
+                    <!-- Opciones inicial -->
+                    <option value="3">3 años</option>
+                    <option value="4">4 años</option>
+                    <option value="5">5 años</option>
+
+                    <!-- Opciones primaria (inicialmente ocultas) -->
+                    <option value="1" style="display: none">1er Grado</option>
+                    <option value="2" style="display: none">2do Grado</option>
+                    <option value="3" style="display: none">3er Grado</option>
+                    <option value="4" style="display: none">4to Grado</option>
+                    <option value="5" style="display: none">5to Grado</option>
+                    <option value="6" style="display: none">6to Grado</option>
+                </select>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="text-center">
+        <button onclick="enviarFormulario()" class="btn btn-primary mt-3" style="background-color: #05428d; width: 150px;">Enviar</button>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="FormularioEnviadoCorrectamenteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Formulario Enviado</h5>
+                @* <button type="button" class="close" onclick="cerrarModalFormulario()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button> *@
+            </div>
+            <div class="modal-body">
+                <p>El formulario ha sido enviado correctamente. Estaremos en contacto lo más pronto posible.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="cerrarModalFormulario()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="FormularioNoCompletadoModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Error</h5>
+                @* <button type="button" class="close" onclick="cerrarModalFormularioNoCompletado()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button> *@
+            </div>
+            <div class="modal-body">
+                <p>Por favor, complete todos los campos del formulario antes de enviarlo.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="cerrarModalFormularioNoCompletado()" style="background-color: darkred;">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/site.js" asp-append-version="true"></script>
