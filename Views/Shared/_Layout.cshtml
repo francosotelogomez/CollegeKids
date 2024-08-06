@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<partial name="modal-login" />
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,6 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" asp-append-version="true" />
     <link href="https://db.onlinewebfonts.com/c/26a3cd904b8ade372aacad1897b747ed?family=Landa+SemiBold" rel="stylesheet" asp-append-version="true" />
     <link href="https://fonts.cdnfonts.com/css/ruda" rel="stylesheet" asp-append-version="true"/>
+    <partial name="modal-login" />
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -41,7 +51,8 @@
                         <li class="nav-item">
                             <a class="nav-link opc" href="@Url.Action("nosotros")" style="font-family: 'Ruda', sans-serif;color: white;font-size:22px;font-weight: bold;">Nosotros</a>
                         </li>
-                        <li class="nav-item">
+                        
+                        @* <li class="nav-item">
                             <a class="nav-link" href="https://www.facebook.com/collegek1ds/" target="_blank"><i class="fab fa-facebook" style="font-size: 25px; color:#ee6538;"></i></a>
                         </li>
                         <li class="nav-item">
@@ -49,8 +60,15 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://wa.me/+51954899657" target="_blank"><i class="fab fa-whatsapp" style="font-size: 25px; color: #ee6538;"></i></a>
+                        </li> *@
+                        
+                        <li class="nav-item">
+                            <a class="nav-link opc" href="#" data-toggle="modal" data-target="#login_info_guardada" style="font-family: 'Ruda', sans-serif; color: white; font-size: 22px; font-weight: bold;">
+                                Inicia Sesión
+                            </a>
                         </li>
                     </ul>
+                    
                 </div>
             </div>
         </nav>
@@ -77,7 +95,7 @@
 
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <ul class="social-icons">
-                        <p class="text-black">SIGAMOS CONECTADOS</p>
+                        <p style="font-weight:bold; color:#05428d; text-decoration:none">SIGAMOS CONECTADOS</p>
                         <li><a href="https://www.facebook.com/collegek1ds/" target="_blank"><i class="fab fa-facebook" style="font-size: 30px; color: #05428d;"></i></a></li>
                         <li><a href="https://www.instagram.com/college_kids_pe/" target="_blank"><i class="fab fa-instagram" style="font-size: 30px; color: #05428d;"></i></a></li>
                         <li><a href="https://wa.me/+51954899657" target="_blank"><i class="fab fa-whatsapp" style="font-size: 30px; color: #05428d;"></i></a></li>
@@ -93,3 +111,18 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<script>
+    document.getElementById('openModal').onclick = function () {
+        document.getElementById('login_info_guardada').style.display = 'block';
+    }
+
+    document.querySelector('.close').onclick = function () {
+        document.getElementById('login_info_guardada').style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+        if (event.target == document.getElementById('login_info_guardada')) {
+            document.getElementById('login_info_guardada').style.display = 'none';
+        }
+    }
+</script>
