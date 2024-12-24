@@ -1,5 +1,6 @@
-﻿<partial name="modal-login" />
-
+﻿@using System.Security.Claims
+<partial name="modal-login" />
+<partial name="mantenimiento"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,12 +26,10 @@
 <body>
     
     <header>
-        
         <nav class="navbar navbar-expand-md navbar-light" style="background-color: #05428d; color: #ee6538; border-bottom: 1px solid #ddd;">
             <div class="container">
                 <a class="navbar-brand" href="@Url.Action("")" style="font-family: 'Ruda', sans-serif; color: #ee6538; font-size: 50px;">
-@*                     <img src="~/img/collegekids.png" alt="College Kids Logo" style="height: 65px; margin-right: 10px;" />
- *@                    College Kids
+                    College Kids
                 </a>
 
                 <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #ee6538;">
@@ -39,41 +38,42 @@
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item pulse">
-                            <a class="nav-link pulse" href="@Url.Action("matricula")" style="font-family: 'Ruda', sans-serif;color: #ee6538; font-size:26px;font-weight: 800;padding-top: 6px;">Matrículas 2024</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link opc" href="@Url.Action("propuesta")" style="font-family: 'Ruda', sans-serif; color: white; font-size: 22px; font-weight: bold;">Propuesta Educativa</a>
-                        </li>
-                        @* <li class="nav-item">
-                            <a class="nav-link opc" href="@Url.Action("contactanos")" style="font-family: 'Ruda', sans-serif;color: white;font-size:22px;font-weight: bold;">Contáctanos</a>
-                        </li> *@
-                        <li class="nav-item">
-                            <a class="nav-link opc" href="@Url.Action("nosotros")" style="font-family: 'Ruda', sans-serif;color: white;font-size:22px;font-weight: bold;">Nosotros</a>
-                        </li>
-                        
-                        @* <li class="nav-item">
-                            <a class="nav-link" href="https://www.facebook.com/collegek1ds/" target="_blank"><i class="fab fa-facebook" style="font-size: 25px; color:#ee6538;"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.instagram.com/college_kids_pe/" target="_blank"><i class="fab fa-instagram" style="font-size: 25px; color:#ee6538;"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://wa.me/+51954899657" target="_blank"><i class="fab fa-whatsapp" style="font-size: 25px; color: #ee6538;"></i></a>
-                        </li> *@
-                        
-                        <li class="nav-item">
-                            <a class="nav-link opc" href="#" data-toggle="modal" data-target="#login_info_guardada" style="font-family: 'Ruda', sans-serif; color: white; font-size: 22px; font-weight: bold;">
-                                Inicia Sesión
-                            </a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link text-white" style="font-family: 'Ruda', sans-serif; font-size: 22px; font-weight: bold;">
+                                    Rol: @(User.FindFirstValue(ClaimTypes.Role) == "1" ? "Admin" : "User")
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link opc" href="@Url.Action("Logout", "Panel")" style="font-family: 'Ruda', sans-serif; color: white; font-size: 22px; font-weight: bold;">
+                                    Cerrar Sesión
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item pulse">
+                                <a class="nav-link pulse" href="@Url.Action("matricula")" style="font-family: 'Ruda', sans-serif;color: #ee6538; font-size:26px;font-weight: 800;padding-top: 6px;">Matrículas 2025</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link opc" href="@Url.Action("propuesta")" style="font-family: 'Ruda', sans-serif; color: white; font-size: 22px; font-weight: bold;">Propuesta Educativa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link opc" href="@Url.Action("nosotros")" style="font-family: 'Ruda', sans-serif;color: white;font-size:22px;font-weight: bold;">Nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link opc" href="#" data-toggle="modal" data-target="#login_info_guardada" style="font-family: 'Ruda', sans-serif; color: white; font-size: 22px; font-weight: bold;">
+                                    Inicia Sesión
+                                </a>
+                            </li>
+                        }
                     </ul>
-                    
                 </div>
             </div>
         </nav>
-
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -81,29 +81,30 @@
     </div>
 
     
-    <footer class="site-footer xd" style="background-color: #f37021;">
-        
+    <footer class="site-footer xd" style="background-color: lightgray;">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-sm-6 col-xs-12">
-                    <p style="color:#05428d" class="copyright-text mt-5">
-                        Copyright &copy; 2024 Todos los derechos reservados por
+                <div class="col-md-8 col-sm-6 col-xs-12 d-flex align-items-center">
+                    <p style="color:#05428d" class="copyright-text">
+                        Copyright &copy; 2025 Todos los derechos reservados por
                         <a style="font-weight:bold; color:#05428d; text-decoration:none" href="https://collegekids.edu.pe">College Kids</a>.
                     </p>
-                    
                 </div>
+                <div class="col-md-4 col-sm-6 col-xs-12 mb-0 d-flex align-items-center justify-content-between">
+                    <img src="~/img/cambridge.png" alt="Cambridge Logo" class="img-fluid" style="max-width: 100px;">
 
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <ul class="social-icons">
-                        <p style="font-weight:bold; color:#05428d; text-decoration:none">SIGAMOS CONECTADOS</p>
-                        <li><a href="https://www.facebook.com/collegek1ds/" target="_blank"><i class="fab fa-facebook" style="font-size: 30px; color: #05428d;"></i></a></li>
-                        <li><a href="https://www.instagram.com/college_kids_pe/" target="_blank"><i class="fab fa-instagram" style="font-size: 30px; color: #05428d;"></i></a></li>
+                    <ul class="social-icons d-flex mb-0" style="list-style: none; padding-left: 0; margin: 0;">
+                        <li class="me-3"><a href="https://www.facebook.com/collegek1ds/" target="_blank"><i class="fab fa-facebook" style="font-size: 30px; color: #05428d;"></i></a></li>
+                        <li class="me-3"><a href="https://www.instagram.com/college_kids_pe/" target="_blank"><i class="fab fa-instagram" style="font-size: 30px; color: #05428d;"></i></a></li>
                         <li><a href="https://wa.me/+51954899657" target="_blank"><i class="fab fa-whatsapp" style="font-size: 30px; color: #05428d;"></i></a></li>
                     </ul>
                 </div>
+
             </div>
+            
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -28,65 +28,55 @@
         }
     }
 
-function enviarFormulario(){
+function enviarFormulario() {
     let nombreElement = $("#nombre").val();
     let correoElement = $("#correo").val();
     let celularElement = $("#celular").val();
     let mensajeElement = $("#mensaje").val();
     let nivelElement = $("#nivel").val();
     let gradoElement = $("#grado").val();
+
     if (
         nombreElement.trim() == '' ||
         correoElement.trim() == '' ||
         celularElement.trim() == '' ||
         mensajeElement.trim() == '' ||
-        nivelElement.trim() == '' ||
-        gradoElement.trim() == ''
+        (nivelElement == '' || nivelElement == null) ||
+        (gradoElement == '' || gradoElement == null)
     ) {
         $('#FormularioNoCompletadoModal').modal('show');
-
-    //    resetEfectoBtnCrearPersona();
     } else {
+        // Crear objeto con los datos del formulario
+        let formularioData = {
+            Nombre: nombreElement,
+            Correo: correoElement,
+            Celular: celularElement,
+            DetalleConsulta: mensajeElement,
+            Seccion: nivelElement,
+            Grado: gradoElement
+        };
 
-        let datos = {
-            nombre: nombreElement,
-            grado: gradoElement,
-            nivel: nivelElement,
-            correo: correoElement,
-            celular: celularElement,
-            mensaje: mensajeElement,
-        }
-        console.log(response);
-        $('#FormularioEnviadoCorrectamenteModal').modal('show');
-        $("#nombre").val("");
-        $("#correo").val("");
-        $("#celular").val("");
-        $("#mensaje").val("");
-        $("#nivel").val("");
-        $("#grado").val("");
-        //$.ajax({
-        //    type: 'POST',
-        //    url: 'https://localhost:7217/Twilio',
-        //    contentType: 'application/json',
-        //    data: JSON.stringify(datos),
-        //    success: function (response) {
-        //        console.log(response);
-        //        $('#FormularioEnviadoCorrectamenteModal').modal('show');
-        //        $("#nombre").val("");
-        //        $("#correo").val("");
-        //        $("#celular").val("");
-        //        $("#mensaje").val("");
-        //        $("#nivel").val("");
-        //        $("#grado").val("");
-
-        //    },
-        //    error: function (error) {
-        //        console.error(error);
-        //    }
-        //});
-
+        // Enviar datos al servidor mediante AJAX
+        $.ajax({
+            url: '/Consultas/Registrar',  // URL del controlador
+            type: 'POST',
+            data: formularioData,
+            success: function (response) {
+                if (response.success) {
+                    alert("Consulta registrada correctamente.");
+                    // Limpiar formulario si es necesario
+                    $('#formularioConsultas')[0].reset();
+                } else {
+                    alert("Hubo un problema al registrar la consulta.");
+                }
+            },
+            error: function () {
+                alert("Error en la comunicación con el servidor.");
+            }
+        });
     }
-};
+}
+
 
 function cerrarModalFormulario(){
     $('#FormularioEnviadoCorrectamenteModal').modal('hide');
