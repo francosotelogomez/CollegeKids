@@ -41,7 +41,7 @@ namespace CollegeKids2._0.Controllers
                 await HttpContext.SignInAsync("Cookies", principal);
 
                 // Redirigir según el rol
-                if (usuario.RolId == 1)
+                if (usuario.RolId == 1 || usuario.RolId == 3)
                 {
                     return Json(new { success = true, redirectUrl = "/Panel" });
                 }

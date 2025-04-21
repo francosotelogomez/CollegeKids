@@ -21,6 +21,13 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="//cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+
+    <!-- DataTables JS -->
+    <script src="//cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
 
 </head>
 <body>
@@ -28,9 +35,17 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-light" style="background-color: #05428d; color: #ee6538; border-bottom: 1px solid #ddd;">
             <div class="container">
-                <a class="navbar-brand" href="@Url.Action("")" style="font-family: 'Ruda', sans-serif; color: #ee6538; font-size: 50px;">
-                    College Kids
+                <a class="navbar-brand" href="@Url.Action("")" style="font-family: 'Ruda', sans-serif; color: #ee6538;font-size:2.25rem">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span>College Kids (Panel de Control)</span>
+                    }
+                    else
+                    {
+                        <span>College Kids</span>
+                    }
                 </a>
+
 
                 <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #ee6538;">
                     <span class="navbar-toggler-icon"></span>

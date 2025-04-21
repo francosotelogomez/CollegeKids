@@ -1,6 +1,27 @@
 ﻿$(document).ready(function () {
-    console.log("ready!");
+    
+
 });
+function actualizarEstadoConsulta(id, atendida) {
+    // Realizar la solicitud AJAX
+    $.ajax({
+        url: '/Panel/UpdateConsulta', // URL de la acción
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ id: id, atendida: atendida }),
+        success: function (response) {
+            if (response.success) {
+                $('#status-message').css('color', 'green').text('Estado actualizado correctamente.');
+            } else {
+                $('#status-message').css('color', 'red').text('Error al actualizar el estado.');
+            }
+        },
+        error: function () {
+            $('#status-message').css('color', 'red').text('Ocurrió un error en la solicitud.');
+        }
+    });
+}
+
     function actualizarGrados() {
         var nivelSelect = document.getElementById("nivel");
     var gradoSelect = document.getElementById("grado");

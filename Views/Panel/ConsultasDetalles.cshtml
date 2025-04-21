@@ -1,0 +1,33 @@
+﻿@model CollegeKids2._0.Models.Consulta
+
+<h2>Detalle de Consulta</h2>
+<div>
+    <p><strong>Nombre:</strong> @Model.Nombre</p>
+    <p><strong>Correo:</strong> @Model.Correo</p>
+    <p><strong>Celular:</strong> @Model.Celular</p>
+    <p><strong>Detalle:</strong> @Model.DetalleConsulta</p>
+    <p><strong>Sección:</strong> @Model.Seccion</p>
+    <p><strong>Grado:</strong> @Model.Grado</p>
+    <p><strong>Fecha de Consulta:</strong> @Model.FechaConsulta.ToString("dd/MM/yyyy HH:mm")</p>
+
+    <div>
+        <label>
+            <input type="checkbox" id="atendida-checkbox" data-id="@Model.Id" @(Model.Atendida ? "checked" : "") />
+            Marcar como atendida
+        </label>
+    </div>
+    <button id="guardar-estado" class="btn btn-success" style="margin-top: 10px;">Guardar</button>
+    <div id="status-message" style="margin-top: 10px; color: green;"></div>
+</div>
+<script>
+    // Llama a la función en site.js
+    function guardarEstadoConsulta() {
+        const consultaId = $('#atendida-checkbox').data('id'); // Obtener ID
+        const isChecked = $('#atendida-checkbox').is(':checked'); // Obtener estado del checkbox
+
+        actualizarEstadoConsulta(consultaId, isChecked);
+    }
+
+    // Asocia el evento de clic al botón
+    $('#guardar-estado').click(guardarEstadoConsulta);
+</script>

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<CollegeKids2._0.Models.Consulta>
+<script src="lib/datatables/jquery.dataTables.min.js"></script>
+
+<h2>Lista de Consultas</h2>
+
+<div class="mb-3">
+    <button id="btn-show-attended" class="btn btn-success">Mostrar Atendidas</button>
+    <button id="btn-show-not-attended" class="btn btn-danger">Mostrar No Atendidas</button>
+@*     <button id="btn-show-all" class="btn btn-secondary">Mostrar Todas</button>
+ *@</div>
+
+<div class="container mt-4">
+    <div class="table-responsive">
+        <table class="table table-striped" id="tablaConsultas">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Celular</th>
+                    <th>Detalle</th>
+                    <th>Sección</th>
+                    <th>Grado</th>
+                    <th>Fecha Consulta</th>
+                    <th>Atendida</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="consultas-body">
+                @foreach (var consulta in Model.OrderByDescending(c => c.FechaConsulta))
+                {
+                    <tr class="consulta-row">
+                        <td>@consulta.Nombre</td>
+                        <td>@consulta.Correo</td>
+                        <td>@consulta.Celular</td>
+                        <td>@consulta.DetalleConsulta</td>
+                        <td>@consulta.Seccion</td>
+                        <td>@consulta.Grado</td>
+                        <td>@consulta.FechaConsulta.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>
+                            <input type="checkbox" class="consulta-checkbox" disabled @(consulta.Atendida ? "checked" : "") />
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ConsultasDetalles", "Panel", new { id = consulta.Id })" class="btn btn-primary">
+                                Ver Detalle
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>    
+
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Seleccionar los botones y las filas
+        const btnShowAttended = document.getElementById("btn-show-attended");
+        const btnShowNotAttended = document.getElementById("btn-show-not-attended");
+        const btnShowAll = document.getElementById("btn-show-all");
+        const rows = document.querySelectorAll(".consulta-row");
+
+        // Mostrar solo las consultas atendidas
+        btnShowAttended.addEventListener("click", function () {
+            rows.forEach(row => {
+                const checkbox = row.querySelector(".consulta-checkbox");
+                row.style.display = checkbox.checked ? "" : "none"; // Mostrar si el checkbox está marcado
+            });
+        });
+
+        // Mostrar solo las consultas no atendidas
+        btnShowNotAttended.addEventListener("click", function () {
+            rows.forEach(row => {
+                const checkbox = row.querySelector(".consulta-checkbox");
+                row.style.display = !checkbox.checked ? "" : "none"; // Mostrar si el checkbox no está marcado
+            });
+        });
+
+        // Mostrar todas las consultas
+        // btnShowAll.addEventListener("click", function () {
+        //     rows.forEach(row => {
+        //         row.style.display = ""; // Mostrar todas
+        //     });
+        // });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let table = new DataTable('#tablaConsultas', {
+            paging: true,          // Enable pagination
+            searching: true,       // Enable search box
+            info: true,            // Display table info
+            order: [[6, 'desc']],  // Order by the 7th column (Fecha Consulta)
+            lengthMenu: [5, 10, 25, 50], // Options for number of rows to show
+            language: {
+                search: "Buscar:",
+                lengthMenu: "Mostrar _MENU_ registros por página",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                paginate: {
+                    first: "Primero",
+                    last: "Último",
+                    next: "Siguiente",
+                    previous: "Anterior"
+                },
+            },
+        });
+    });
+</script>
+
+

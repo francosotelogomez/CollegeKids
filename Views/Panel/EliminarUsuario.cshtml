@@ -1,0 +1,36 @@
+﻿@model CollegeKids2._0.Models.Usuarios
+
+@{
+    ViewData["Title"] = "Eliminar Usuario";
+}
+
+<h2>Eliminar Usuario</h2>
+
+<div class="alert alert-danger">
+    <p>¿Estás seguro de que deseas eliminar al siguiente usuario?</p>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Nombre</th>
+        <td>@Model.Nombre</td>
+    </tr>
+    <tr>
+        <th>Correo</th>
+        <td>@Model.Correo</td>
+    </tr>
+    <tr>
+        <th>Rol</th>
+        <td>@Model.Rol?.Nombre</td>
+    </tr>
+    <tr>
+        <th>Fecha de Registro</th>
+        <td>@Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
+    </tr>
+</table>
+
+<form asp-action="EliminarUsuario" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Usuarios" class="btn btn-secondary">Cancelar</a>
+</form>

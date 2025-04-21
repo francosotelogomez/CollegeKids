@@ -16,9 +16,20 @@
 
   <ItemGroup>
     <None Include="wwwroot\img\collegekids.png" />
+    <None Include="wwwroot\lib\datatables\Scripts\copy_csv_xls_pdf.swf" />
+    <None Include="wwwroot\lib\datatables\Scripts\dataTables.bootstrap.js" />
+    <None Include="wwwroot\lib\datatables\Scripts\jquery.dataTables.js" />
+    <None Include="wwwroot\lib\datatables\Scripts\jquery.dataTables.min.js" />
+    <None Include="wwwroot\lib\datatables\Scripts\TableTools.js" />
+    <None Include="wwwroot\lib\datatables\Scripts\TableTools_orig.js" />
+    <None Include="wwwroot\lib\datatables\Scripts\ZeroClipboard.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DataTables" Version="1.0.0" />
+    <PackageReference Include="itext7" Version="9.0.0" />
+    <PackageReference Include="itext7.bouncy-castle-adapter" Version="9.0.0" />
+    <PackageReference Include="jQuery" Version="3.7.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />

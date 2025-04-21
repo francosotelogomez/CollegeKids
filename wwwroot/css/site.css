@@ -217,4 +217,91 @@ html, body {
 }
 
 
+.navbar-brand {
+    font-size: 50px; /* Tamaño por defecto */
+}
 
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 30px; /* Tamaño para pantallas móviles */
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .navbar-brand {
+        font-size: 20px; /* Tamaño para pantallas muy pequeñas */
+    }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas por defecto */
+    gap: 20px;
+    padding: 20px;
+}
+
+.grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100px; /* Ajusté la altura para acomodar el texto en una línea */
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+    .grid-item a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        height: auto;
+        line-height: 100px;
+        text-align: center;
+    }
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr; /* Dos columnas en pantallas medianas */
+    }
+
+    .grid-item {
+        font-size: 16px; /* Reducir el tamaño de la fuente */
+        height: 120px; /* Asegurarse de que haya espacio para las dos líneas */
+    }
+
+        /* Salto de línea solo en pantallas pequeñas */
+        .grid-item a {
+            white-space: normal; /* Permitir el salto de línea */
+            line-height: 1.5; /* Ajuste del espaciado entre las líneas */
+        }
+
+            /* Forzar el salto de línea solo en pantallas pequeñas */
+            .grid-item a::after {
+                content: "";
+                display: block;
+            }
+}
+
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+    }
+
+    .grid-item {
+        font-size: 14px; /* Reducir el tamaño de la fuente aún más */
+        height: 100px; /* Asegurarse de que haya espacio para las dos líneas */
+    }
+
+        .grid-item a {
+            line-height: 1.5; /* Asegurarse de que el texto se vea bien con dos líneas */
+            height:auto;
+        }
+}

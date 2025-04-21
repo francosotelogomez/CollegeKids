@@ -1,12 +1,33 @@
-﻿@{
-    ViewData["Title"] = "Panel de Administración";
-}
+﻿<div class="grid-container">
+    @if (User.IsInRole("1"))
+    {
+        <div class="grid-item" style="background-color: #f94144;">
+            <a href="/Panel/Usuarios">Gestión de Usuarios</a>
+        </div>
+        <div class="grid-item" style="background-color: #f3722c;">
+            <a href="/Panel/Consultas">Gestión de Consultas</a>
+        </div>
+        <div class="grid-item" style="background-color: #f9c74f;">
+            <a href="/Panel/Pagos">Gestión de Pagos</a>
+        </div>
+        <div class="grid-item" style="background-color: #90be6d;">
+            <a href="/Panel/Alumnos">Gestión de Alumnos</a>
+        </div>
+        <div class="grid-item" style="background-color: #577590;">
+            <a href="/Panel/Padres">Gestión de Padres</a>
+        </div>
+        <div class="grid-item" style="background-color: #277da1;">
+            <a href="/Panel/Soporte">Soporte</a>
+        </div>
+        <div class="grid-item" style="background-color: #f9c74f;">
+            <a href="/Panel/Documentos">Gestión de documentos</a>
+        </div>
+    }
 
-<h1>Bienvenido al Panel de Administración</h1>
-
-<p>Esta es tu área administrativa. Desde aquí puedes gestionar el sistema.</p>
-
-<ul>
-    <li><a href="/Panel/Usuarios">Gestión de Usuarios(aun no funciona)</a></li>
-@*     <li><a href="/Home/Index">Ir al inicio</a></li>
- *@</ul>
+    @if (User.IsInRole("3"))
+    {
+        <div class="grid-item" style="background-color: #4D908E;">
+            <a href="/Panel/MarcarHora">Marcar hora de llegada</a>
+        </div>
+    }
+</div>

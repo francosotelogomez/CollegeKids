@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CollegeKids2._0.Models.Usuarios>
+
+<h2>Gestión de Usuarios</h2>
+<div class="table-responsive">
+<table class="table table-striped" id="tablaUsuarios">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td>@usuario.Id</td>
+                <td>@usuario.Nombre</td>
+                <td>@usuario.Correo</td>
+                <td>@usuario.Rol.Nombre</td>
+                <td>
+                    <a href="@Url.Action("EditarUsuario", "Panel", new { id = usuario.Id })" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="@Url.Action("EliminarUsuario", "Panel", new { id = usuario.Id })" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este usuario?');">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+<a href="@Url.Action("CrearUsuario", "Panel")" class="btn btn-success">Crear Nuevo Usuario</a>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let table = new DataTable('#tablaUsuarios', {
+            paging: true,          // Enable pagination
+            searching: true,       // Enable search box
+            info: true,            // Display table info
+            order: [[6, 'desc']],  // Order by the 7th column (Fecha Consulta)
+            lengthMenu: [5, 10, 25, 50], // Options for number of rows to show
+            language: {
+                search: "Buscar:",
+                lengthMenu: "Mostrar _MENU_ registros por página",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                paginate: {
+                    first: "Primero",
+                    last: "Último",
+                    next: "Siguiente",
+                    previous: "Anterior"
+                },
+            },
+        });
+    });
+</script>
